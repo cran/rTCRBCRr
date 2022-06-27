@@ -1,0 +1,170 @@
+---
+title: "Quick_Start"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quick_Start}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+The goal of rTCRBCRr is to process the results from clonotyping tools such as trust, mixcr, and immunoseq to analyze the clonotype repertoire metrics
+
+## Installation
+
+You can **NOT** install the released version of rTCRBCRr from [CRAN](https://CRAN.R-project.org) with:
+
+``` r
+install.packages("rTCRBCRr")
+```
+
+You can **ONLY** install the development version from [GitHub](https://github.com/) with:
+
+``` r
+# install.packages("devtools")
+devtools::install_github("sciencepeak/rTCRBCRr")
+```
+
+## Example code
+
+### Attach packages
+
+```{r example}
+library("rTCRBCRr")
+library("magrittr")
+library("readr")
+```
+
+### Read raw data files (trust generated for example) into a list of data frames
+
+```{r message=FALSE, warning=FALSE}
+present_tool <- c("trust", "mixcr")[1]
+example_data_directory <- system.file(paste("extdata", present_tool, sep = "/"), package = "rTCRBCRr")
+input_paths <- dir(example_data_directory, full.names = TRUE)
+input_files <- dir(example_data_directory, full.names = FALSE)
+input_files
+
+sample_names <- sub(".tsv.*", "", input_files)
+sample_names
+
+raw_clonotype_dataframe_list <- lapply(input_paths, readr::read_tsv) %>%
+    magrittr::set_names(., value = sample_names)
+raw_clonotype_dataframe_list
+```
+
+### Tidy up the clonotype dataframes
+
+The tidy-up consists of four steps, namely four functions:
+
+1. format_clonotype_to_immunarch_style
+2. remove_nonproductive_CDR3aa
+3. annotate_chain_name_and_isotype_name 
+4. merge_convergent_clonotype
+
+
+```{r}
+# If you only want to test one sample, you can process the only sample as follows.
+the_divergent_clonotype_dataframe <- raw_clonotype_dataframe_list[["sample_01"]] %>%
+    format_clonotype_to_immunarch_style(., clonotyping_tool = present_tool) %>%
+    remove_nonproductive_CDR3aa %>%
+    annotate_chain_name_and_isotype_name %>%
+    merge_convergent_clonotype
+
+# Then the only one sample should be put into a list, element of which uses the sample name,
+# because the later step need a named list of data frames as input.
+divergent_clonotype_dataframe_list <- list(sample_01 = the_divergent_clonotype_dataframe)
+
+# Otherwise, normally you will have multiple samples,
+# then functional style of processing is preferred as follows.
+divergent_clonotype_dataframe_list <- raw_clonotype_dataframe_list %>%
+    lapply(., format_clonotype_to_immunarch_style, clonotyping_tool = present_tool) %>%
+    lapply(., remove_nonproductive_CDR3aa) %>%
+    lapply(., annotate_chain_name_and_isotype_name) %>%
+    lapply(., merge_convergent_clonotype)
+```
+
+### Calculate and merge repertoire metrics by chains for each sample in the list
+
+This step consists of three functions.
+
+```{r}
+# handle repertoire metrics for all the chains.
+all_sample_all_chain_all_metrics_wide_format_dataframe_list <- the_divergent_clonotype_dataframe_list %>%
+    lapply(., compute_repertoire_metrics_by_chain_name)
+
+all_sample_all_chain_all_metrics_wide_format_dataframe_list
+
+all_sample_all_chain_all_metrics_wide_format_dataframe <- all_sample_all_chain_all_metrics_wide_format_dataframe_list %>%
+    combine_all_sample_repertoire_metrics
+
+all_sample_all_chain_all_metrics_wide_format_dataframe
+
+all_sample_all_chain_individual_metrics_dataframe_list <- all_sample_all_chain_all_metrics_wide_format_dataframe %>%
+    get_item_name_x_sample_name_for_each_metric
+
+all_sample_all_chain_individual_metrics_dataframe_list
+```
+
+### Calculate and merge repertoire metrics by IGH isotypes for each sample in the list
+
+This step consists of three functions.
+
+```{r}
+# handle repertoire metrics all all the isotypes of IGH chain.
+all_sample_IGH_chain_all_metrics_wide_format_dataframe_list <- the_divergent_clonotype_dataframe_list %>%
+    lapply(., calculate_IGH_isotype_proportion)
+
+all_sample_IGH_chain_all_metrics_wide_format_dataframe_list
+
+all_sample_IGH_chain_all_metrics_wide_format_dataframe <- all_sample_IGH_chain_all_metrics_wide_format_dataframe_list %>%
+    combine_all_sample_repertoire_metrics
+
+all_sample_IGH_chain_all_metrics_wide_format_dataframe
+
+all_sample_IGH_chain_individual_metrics_dataframe_list <- all_sample_IGH_chain_all_metrics_wide_format_dataframe %>%
+    get_item_name_x_sample_name_for_each_metric
+
+all_sample_IGH_chain_individual_metrics_dataframe_list
+```
+
+
+## Clonotype repertoire metrics formulas
+
+The repertoire metrics formula including richness, diversity (Shannon entropy), evenness (Pielou's eveness), clonality, and median (frequency median) were defined as follows, where $p_i$ is the frequency of ${\rm clonotype}_i$ in a sample with $N$ unique clonotypes ([Khunger, Rytlewski et al. 2019](https://www.tandfonline.com/doi/full/10.1080/2162402X.2019.1652538), [Looney, Topacio-Hall et al. 2020](https://www.frontiersin.org/articles/10.3389/fimmu.2019.02985/full)). $P$ is the frequency vector of unique clonotypes in a sample.
+
+$$
+richness\ =\ N
+$$
+
+$$
+Shannon\ entropy=-\sum_{i=1}^{N}{p_i\log_2{\left(p_i\right)}}
+$$
+
+$$
+Pielou\prime s\ eveness\ =\ \frac{Shannon\ entropy}{\log_2{N}}
+$$
+
+$$
+clonality\ =\ 1\ -\ Pielou\prime s\ evenness
+$$
+
+$$
+frequency\ median\ =\ median(P)
+$$
+
+The function `calculate_repertoire_metrics` is essential to implement the repertoire metrics formulas
+
+```{r}
+calculate_repertoire_metrics
+```
+
+## Acknowledgements
+
+The [hexagon](https://github.com/terinjokes/StickersStandard) logo of the package was created with the help of the package [hexSticker](https://github.com/GuangchuangYu/hexSticker). The math formula was written with the help of recognition tool [MyScript](https://webdemo.myscript.com/). The latex formula in markdown was inspired by [rmd4sci](https://rmd4sci.njtierney.com/math). The code in this study was inspired by the [UCSB R tutorial note](http://traits-dgs.nceas.ucsb.edu/workspace/r/r-tutorial-for-measuring-species-diversity/Measuring Diversity in R.pdf/attachment_download/file), [LymphoSeq script](https://rdrr.io/bioc/LymphoSeq/src/R/clonality.R), and [vegan package](https://cran.r-project.org/package=vegan).
+
