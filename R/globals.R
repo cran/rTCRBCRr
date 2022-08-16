@@ -1,4 +1,6 @@
-#' Make variable names global to avoid CHECK notes
+#' Global variables
+#' @name the global variables
+#' @title Make variable names global to avoid CHECK notes
 #'
 #' @importFrom utils globalVariables
 utils::globalVariables(c("."))

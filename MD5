@@ -1,4 +1,4 @@
-2b51bf419444df2cdb8f5cabc87d09f8 *DESCRIPTION
+0589a34a7aca8fa672d29f3521bfd4c7 *DESCRIPTION
 7d31f825f639610a73aced6acb74d9ef *LICENSE
 f914203de1703d18927f9cde11ef7c30 *NAMESPACE
 259daaac8fd1e6a23658bd7256361be6 *R/annotate_chain_name_and_isotype_name.R
@@ -9,11 +9,11 @@ b085519cb8d90fc10a3766b85929ada2 *R/compute_repertoire_metrics_by_chain_name.R
 fa852559a95e2935d7dfff0f3891b9e1 *R/data.R
 a13a44d4ffed6b575537ff4741d74f2d *R/format_clonotype_to_immunarch_style.R
 27069326124185e4dd9b4d91a673dbdc *R/get_item_name_x_sample_name_for_each_metric.R
-814688c1b6d5ad1b5d77653f90072f0a *R/globals.R
+52da16d3f3df9483f33bb944c0459e28 *R/globals.R
 400d779290566bd16cd9915887ead983 *R/merge_convergent_clonotype.R
 df6cc46bc7fae1a55b713f3d5065b35a *R/rTCRBCRr-package.R
 ad5741b22072378d61d5a01b4320c095 *R/remove_nonproductive_CDR3aa.R
-97b693ec7e5e4b073bf89016a92dfeb3 *README.md
+4ecdc1cac102bf7507c458b61cda4c74 *README.md
 49d9a41cbafe69001c8db5c0ca2d9b38 *build/vignette.rds
 31279f7689b43d3a6df29ac155f5aa0e *data/all_sample_IGH_chain_all_metrics_wide_format_dataframe.rda
 e8a9ec314807860e8b9414d17cf6d4d6 *data/all_sample_IGH_chain_all_metrics_wide_format_dataframe_list.rda
@@ -28,8 +28,8 @@ f68a1991c51f22c5132c897f0998813a *data/nonproductive_CDR3aa_removed_dataframe.rd
 423cf16b93bad106e885a3c55be3f051 *data/raw_input_clonotype_dataframe.rda
 efb3fd29f49c6dce261f816fe3524b18 *data/the_divergent_clonotype_dataframe_list.rda
 95062b55eaf1623dbae6d6f6f171dfa1 *inst/doc/Quick_Start.R
-daef36ba95520601a090f46d15357e42 *inst/doc/Quick_Start.Rmd
-d073bffca271c651e6227aaa38b771f0 *inst/doc/Quick_Start.html
+2dd5164bcb5dc1110f9bfcd80e46e7ef *inst/doc/Quick_Start.Rmd
+a5dbb82c91167f6a93891eb8d2c00781 *inst/doc/Quick_Start.html
 b2be4a06845c334cc3c540b1ed5d4ff8 *inst/extdata/mixcr/sample_01.tsv.bz2
 aef003b90888951ee2ba00e85bf56017 *inst/extdata/mixcr/sample_02.tsv.bz2
 5f299700a5554cd0e66dde8f9dc4f5c1 *inst/extdata/mixcr/sample_03.tsv.bz2
@@ -59,10 +59,11 @@ c9d5ac539a97598030787bcbd728425a *man/format_clonotype_to_immunarch_style.Rd
 dd1d4556195f8d5cbc149940a877ecb9 *man/nonproductive_CDR3aa_removed_dataframe.Rd
 6e6f417f017e490148368e6e8491309a *man/parse_mixcr.Rd
 5ec3511892e3b9a8d7fdf108f6f1da36 *man/parse_trust4.Rd
-b4a0c62629d85a9a95968262c93b04bd *man/rTCRBCRr-package.Rd
+e04d32fa3618f0099874a1b0deb80dc8 *man/rTCRBCRr-package.Rd
 2c0636547004f106b958e6df437f68c9 *man/raw_input_clonotype_dataframe.Rd
 495964754a6fbaa9b1854ed6be58e83d *man/remove_nonproductive_CDR3aa.Rd
 ada3997b2d76797afd81ad4c887d9c8e *man/summarize_convergence_function.Rd
 cd4f677ed4712ae6a7b02022d11646c2 *man/summarize_repertoire_metrics.Rd
+0321b79a9b93d8ff9bff9085bc8231da *man/the-global-variables.Rd
 b5da9a6c4805d01d887de524f73d7679 *man/the_divergent_clonotype_dataframe_list.Rd
-daef36ba95520601a090f46d15357e42 *vignettes/Quick_Start.Rmd
+2dd5164bcb5dc1110f9bfcd80e46e7ef *vignettes/Quick_Start.Rmd

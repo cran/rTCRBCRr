@@ -12,15 +12,14 @@ metrics
 
 ## Installation
 
-After the package is accepted by the [CRAN](https://CRAN.R-project.org),
-you can **THEN** install the released version of rTCRBCRr from CRAN
-with:
+The package is accepted by the [CRAN](https://CRAN.R-project.org), you
+can install the released version of rTCRBCRr from CRAN with:
 
 ``` r
 install.packages("rTCRBCRr")
 ```
 
-You can **ONLY** install the development version from
+You can also install the development version from
 [GitHub](https://github.com/) with:
 
 ``` r
@@ -331,7 +330,7 @@ entropy), evenness (Pielou’s eveness), clonality, and median (frequency
 median) were defined as follows, where
 ![p_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;p_i "p_i")
 is the frequency of
-![{\\rm clonotype}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7B%5Crm%20clonotype%7D_i "{\rm clonotype}_i")
+![{\rm clonotype}\_i](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%7B%5Crm%20clonotype%7D_i "{\rm clonotype}_i")
 in a sample with
 ![N](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;N "N")
 unique clonotypes ([Khunger, Rytlewski et
@@ -341,35 +340,15 @@ al. 2020](https://www.frontiersin.org/articles/10.3389/fimmu.2019.02985/full)).
 ![P](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;P "P")
 is the frequency vector of unique clonotypes in a sample.
 
-![
-richness\\ =\\ N
-](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Arichness%5C%20%3D%5C%20N%0A "
-richness\ =\ N
-")
+![richness\\ =\\ N](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;richness%5C%20%3D%5C%20N "richness\ =\ N")
 
-![
-Shannon\\ entropy=-\\sum\_{i=1}^{N}{p_i\\log_2{\\left(p_i\\right)}}
-](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0AShannon%5C%20entropy%3D-%5Csum_%7Bi%3D1%7D%5E%7BN%7D%7Bp_i%5Clog_2%7B%5Cleft%28p_i%5Cright%29%7D%7D%0A "
-Shannon\ entropy=-\sum_{i=1}^{N}{p_i\log_2{\left(p_i\right)}}
-")
+![Shannon\\ entropy=-\sum\_{i=1}^{N}{p_i\log_2{\left(p_i\right)}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Shannon%5C%20entropy%3D-%5Csum_%7Bi%3D1%7D%5E%7BN%7D%7Bp_i%5Clog_2%7B%5Cleft%28p_i%5Cright%29%7D%7D "Shannon\ entropy=-\sum_{i=1}^{N}{p_i\log_2{\left(p_i\right)}}")
 
-![
-Pielou\\prime s\\ eveness\\ =\\ \\frac{Shannon\\ entropy}{\\log_2{N}}
-](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0APielou%5Cprime%20s%5C%20eveness%5C%20%3D%5C%20%5Cfrac%7BShannon%5C%20entropy%7D%7B%5Clog_2%7BN%7D%7D%0A "
-Pielou\prime s\ eveness\ =\ \frac{Shannon\ entropy}{\log_2{N}}
-")
+![Pielou\prime s\\ eveness\\ =\\ \frac{Shannon\\ entropy}{\log_2{N}}](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;Pielou%5Cprime%20s%5C%20eveness%5C%20%3D%5C%20%5Cfrac%7BShannon%5C%20entropy%7D%7B%5Clog_2%7BN%7D%7D "Pielou\prime s\ eveness\ =\ \frac{Shannon\ entropy}{\log_2{N}}")
 
-![
-clonality\\ =\\ 1\\ -\\ Pielou\\prime s\\ evenness
-](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Aclonality%5C%20%3D%5C%201%5C%20-%5C%20Pielou%5Cprime%20s%5C%20evenness%0A "
-clonality\ =\ 1\ -\ Pielou\prime s\ evenness
-")
+![clonality\\ =\\ 1\\ -\\ Pielou\prime s\\ evenness](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;clonality%5C%20%3D%5C%201%5C%20-%5C%20Pielou%5Cprime%20s%5C%20evenness "clonality\ =\ 1\ -\ Pielou\prime s\ evenness")
 
-![
-frequency\\ median\\ =\\ median(P)
-](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;%0Afrequency%5C%20median%5C%20%3D%5C%20median%28P%29%0A "
-frequency\ median\ =\ median(P)
-")
+![frequency\\ median\\ =\\ median(P)](https://latex.codecogs.com/png.image?%5Cdpi%7B110%7D&space;%5Cbg_white&space;frequency%5C%20median%5C%20%3D%5C%20median%28P%29 "frequency\ median\ =\ median(P)")
 
 The function `calculate_repertoire_metrics` is essential to implement
 the repertoire metrics formulas
@@ -393,7 +372,7 @@ calculate_repertoire_metrics
 #>         "evenness", "median")
 #>     output_vector
 #> }
-#> <bytecode: 0x00000000285a2908>
+#> <bytecode: 0x00000000285ad120>
 #> <environment: namespace:rTCRBCRr>
 ```
 

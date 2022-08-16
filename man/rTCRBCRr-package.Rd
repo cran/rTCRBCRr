@@ -6,7 +6,7 @@
 \alias{rTCRBCRr-package}
 \title{rTCRBCRr: Repertoire Analysis of the Detected Clonotype}
 \description{
-\if{html}{\figure{logo.png}{options: align='right' alt='logo' width='120'}}
+\if{html}{\figure{logo.png}{options: style='float: right' alt='logo' width='120'}}
 
 The 'TRUST4' or 'MiXCR' is used to identify the clonotypes. The goal of 'rTCRBCRr' is to process the results from these clonotyping tools, and analyze the clonotype repertoire metrics based on chain names and IGH isotypes. The manuscript is still under preparation for publication for now. The references describing the methods in this package will be added later.
 }

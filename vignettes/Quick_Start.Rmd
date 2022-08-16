@@ -18,15 +18,15 @@ The goal of rTCRBCRr is to process the results from clonotyping tools such as tr
 
 ## Installation
 
-You can **NOT** install the released version of rTCRBCRr from [CRAN](https://CRAN.R-project.org) with:
+The package is accepted by the [CRAN](https://CRAN.R-project.org), you can install the released version of rTCRBCRr from CRAN with:
 
-``` r
+```r
 install.packages("rTCRBCRr")
 ```
 
-You can **ONLY** install the development version from [GitHub](https://github.com/) with:
+You can also install the development version from [GitHub](https://github.com/) with:
 
-``` r
+```r
 # install.packages("devtools")
 devtools::install_github("sciencepeak/rTCRBCRr")
 ```
